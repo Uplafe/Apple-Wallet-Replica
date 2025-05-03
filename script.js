@@ -1,95 +1,59 @@
-const addBtn = document.getElementById("addBtn");
-const popup = document.getElementById("popup");
-const addCreditBtn = document.getElementById("addCreditBtn");
-const addLoyaltyBtn = document.getElementById("addLoyaltyBtn");
-const cardContainer = document.getElementById("cardContainer");
-const doneBtn = document.getElementById("done-btn");
+let cardStack = [];
+const CARD_OFFSET = 30; // Pixel overlap between cards
 
-let cards = [];
-let loyaltyCards = [];
-
-// Hidden input for file upload
-const fileInput = document.createElement("input");
-fileInput.type = "file";
-fileInput.accept = "image/*";
-fileInput.style.display = "none";
-document.body.appendChild(fileInput);
-
-// Open popup when "+" is clicked
-addBtn.addEventListener("click", () => {
-  popup.classList.remove("hidden");
-});
-
-// Add credit card
-addCreditBtn.addEventListener("click", () => {
-  popup.classList.add("hidden");
-  fileInput.onchange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const url = URL.createObjectURL(file);
-    cards.push(url);
-    renderCards();
+function createCard(imageSrc, isLoyalty) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.type = isLoyalty ? 'loyalty' : 'credit';
+  
+  const img = new Image();
+  img.src = imageSrc;
+  img.onload = () => {
+    card.style.transform = `translateY(${cardStack.length * CARD_OFFSET}px)`;
+    card.style.zIndex = cardStack.length + 1;
   };
-  fileInput.click();
-});
+  
+  card.appendChild(img);
+  cardStack.push(card);
+  cardContainer.appendChild(card);
 
-// Add loyalty card
-addLoyaltyBtn.addEventListener("click", () => {
-  popup.classList.add("hidden");
-  fileInput.onchange = (e) => {
+  // Click Handler
+  card.addEventListener('click', () => {
+    cardStack.forEach(c => {
+      c.style.transform = c === card ? 
+        'translateY(0) scale(1)' : 
+        `translateY(-${CARD_OFFSET}px) scale(0.9)`;
+      c.style.zIndex = c === card ? 1000 : 1;
+    });
+    
+    card.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    });
+    
+    document.querySelector('header').style.display = 'none';
+    doneBtn.classList.add('visible');
+  });
+}
+
+// Update image upload handler
+function handleImageUpload(isLoyalty) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.onchange = e => {
     const file = e.target.files[0];
-    if (!file) return;
-
-    const url = URL.createObjectURL(file);
-    loyaltyCards.push(url);
-    renderCards();
+    const reader = new FileReader();
+    reader.onload = () => {
+      createCard(reader.result, isLoyalty);
+      // Auto-scroll to new card
+      cardContainer.scrollTo({
+        top: cardContainer.scrollHeight,
+        behavior: 'smooth'
+      });
+    };
+    reader.readAsDataURL(file);
   };
-  fileInput.click();
-});
-
-// Close popup
-function closePopup() {
-  popup.classList.add("hidden");
+  input.click();
 }
 
-// Render cards
-function renderCards() {
-  cardContainer.innerHTML = "";
-
-  const all = [...cards, ...loyaltyCards];
-
-  all.forEach((src, index) => {
-    const div = document.createElement("div");
-    div.className = "card";
-    const img = document.createElement("img");
-    img.src = src;
-    div.appendChild(img);
-
-    // Add stacking animation
-    div.style.marginTop = index === 0 ? "0px" : "-100px";
-    div.style.zIndex = all.length - index;
-
-    div.addEventListener("click", () => expandCard(div));
-    cardContainer.appendChild(div);
-  });
-}
-
-// Expand selected card
-function expandCard(card) {
-  document.querySelectorAll(".card").forEach((c) => {
-    if (c !== card) c.style.display = "none";
-  });
-
-  card.classList.add("active");
-  doneBtn.style.display = "block";
-}
-
-// Exit card view
-doneBtn.addEventListener("click", () => {
-  document.querySelectorAll(".card").forEach((card) => {
-    card.style.display = "block";
-    card.classList.remove("active");
-  });
-  doneBtn.style.display = "none";
-});
