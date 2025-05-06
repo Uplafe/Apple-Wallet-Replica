@@ -8,6 +8,7 @@
 🤔 FAQ
 
 🔹How does it work?
+
 🔸This website was made to be used for testing card layouts and designs, no personal information or credit/debit card 
 information is required for it to run, simply press on the plus button on the main page and you are prompted with 2 options,
 Credit/Debit and Passes/Loyatly, this questions are asked to establish the correct possession of the cards on the main page.
@@ -18,10 +19,15 @@ By following these steps you will find the website as a form of application with
 
 👨‍💻 From Developer:
 Completely opensource program.
+
 Try out the website: https://uplafe.github.io/Apple-Wallet-Replica/
+
 Follow me for new updates and more repos! https://github.com/Uplafe
+
 My Website: https://uplafe.com
+
 Support my work: paypal.me/ilhummer
+
 Discord: @uplafe
 
 Thank you for reading ❤️
