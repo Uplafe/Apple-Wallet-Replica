@@ -14,6 +14,7 @@ information is required for it to run, simply press on the plus button on the ma
 Credit/Debit and Passes/Loyatly, this questions are asked to establish the correct possession of the cards on the main page.
 
 🔹How can I use this website like an app?
+
 🔸Visit the website on safari > Press the share icon on the search bar > Scroll down > Add to home screen > Change the name if needed > Press Done.
 By following these steps you will find the website as a form of application with no search bar.
 
