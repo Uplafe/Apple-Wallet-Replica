@@ -19,6 +19,7 @@ Credit/Debit and Passes/Loyatly, this questions are asked to establish the corre
 By following these steps you will find the website as a form of application with no search bar.
 
 👨‍💻 From Developer:
+
 Completely opensource program.
 
 Try out the website: https://uplafe.github.io/Apple-Wallet-Replica/
