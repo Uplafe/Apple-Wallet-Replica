@@ -27,7 +27,7 @@ Follow me for new updates and more repos! https://github.com/Uplafe
 
 My Website: https://uplafe.com
 
-Support my work: paypal.me/ilhummer
+Support my work: https://paypal.me/ilhummer
 
 Discord: @uplafe
 
