@@ -32,7 +32,7 @@ Support my work: https://paypal.me/ilhummer
 
 Discord: @uplafe
 
-Thank you for reading ❤️
+❤️ Thank you for reading 
 
 
 
